@@ -67,7 +67,7 @@ def is_interesting(number, awesome_phrases):
          return color
    return 0
 
-
+# Method 2
 def is_good(n, awesome):
    return n in awesome or str(n) in "1234567890 9876543210" or str(n) == str(n)[::-1] or int(str(n)[1:]) == 0
 
@@ -78,3 +78,61 @@ def is_interesting(n, awesome):
    if n > 97 and (is_good(n + 1, awesome) or is_good(n + 2, awesome)):
       return 1
    return 0
+
+# Method 3
+def is_incrementing(number):
+   if  str(number) in '1234567890':
+      return True
+   else:
+      return False
+
+
+def is_decrementing(number):
+   if  str(number) in '9876543210':
+      return True
+   else:
+      return False
+
+
+def is_palindrome(number):
+   if str(number) == str(number)[::-1]:
+      return True
+   else:
+      return False
+
+
+def is_round(number):
+   return set(str(number)[1:]) == set('0')
+
+
+def is_interesting(number, awesome_phrases):
+    tests = (is_round, is_incrementing, is_decrementing,
+            is_palindrome, awesome_phrases.__contains__)
+
+    if number > 99:
+        if any(test(number) for test in tests):
+            return 2
+        elif any(test(number+1) for test in tests):
+                return 1
+        elif any(test(number+2) for test in tests):
+                return 1
+        else:
+            return 0
+    elif number == 98:
+        if any(test(number+1) for test in tests):
+                return 1
+        elif any(test(number+2) for test in tests):
+                return 1
+        else:
+            return 0
+    elif number == 99:
+        if any(test(number+1) for test in tests):
+            return 1
+        elif any(test(number+2) for test in tests):
+            return 1
+        else:
+            return 0
+    else:
+        return 0
+
+
