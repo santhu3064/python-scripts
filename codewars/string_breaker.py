@@ -27,3 +27,9 @@ def string_breakers(n, st):
         i += n
     return a.rstrip("\n")
         
+
+    # solution 2
+    
+    def string_breakers(n, st):
+    s = st.replace(' ', '')
+    return '\n'.join(s[i:i+n] for i in range(0, len(s), n))
