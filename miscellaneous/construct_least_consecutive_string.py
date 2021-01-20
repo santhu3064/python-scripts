@@ -1,5 +1,6 @@
 # Problem: Compress a string such that 'AAABCCDDDD' becomes 'A3BC2D4'. Only compress the string if it saves space.¶
 
+import unittest
 
 def get_final_string(word):
 
@@ -20,28 +21,39 @@ def get_final_string(word):
    return h
 
 
+def get_consecutive(word):
+   t = get_final_string(word)
+   finalString = ""
+   for s,k in t:
+      mul = s * k
+      ad = s + str(k)
+
+      if len(ad) < len(mul):
+         finalString += ad
+      else:
+         finalString += mul
+
+   return finalString
 
 
 
+class TestLeastConsecutiveString(unittest.TestCase):
+   def test_scenario_one(self):
+      self.assertEqual(get_consecutive('ABCDEFG'),'ABCDEFG',"pass")
 
-t = get_final_string('AAABCCDDDDGGGBSASSASSSSSAAA')
-print(t)
+   def test_scenario_two(self):
+      self.assertEqual(get_consecutive('AABBCCDDEEFF'),'AABBCCDDEEFF',"pass")
 
-finalString = ""
-for s,k in t:
-   mul = s * k
-   ad = s + str(k)
+   def test_scenario_three(self):
+      self.assertEqual(get_consecutive('AABCCDDDDGGGBSASSASSSSSAAA'),'AABCCD4G3BSASSAS5A3',"pass")
 
-   if len(ad) < len(mul):
-      finalString += ad
-   else:
-      finalString += mul
+   def test_scenario_four(self):
+      self.assertEqual(get_consecutive('ZZHJSIKLKKJKSIIIKAJAHSHHA'),'ZZHJSIKLKKJKSI3KAJAHSHHA',"pass")
 
-print(finalString)
+if __name__ == "__main__":
+   unittest.main()
 
-
-
-
+#
 
 
 
